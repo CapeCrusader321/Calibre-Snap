@@ -33,7 +33,7 @@ apps:
       - optical-drive
       - removable-media
     common-id: com.calibre_ebook.calibre
-    desktop: usr/share/applications/calibre-gui.desktop
+    #desktop: usr/share/applications/calibre-gui.desktop
     
 parts:
   calibre:
