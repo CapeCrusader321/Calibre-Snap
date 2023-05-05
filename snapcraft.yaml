@@ -22,7 +22,7 @@ slots:
     
 apps:
   calibre:
-    command: usr/bin/calibre
+    command: opt/calibre
     extensions:
       - kde-neon
     plugs:
@@ -54,6 +54,15 @@ parts:
       - qt6-multimedia-dev
       - qt6-image-formats-plugins
       - qt6-l10n-tools
+      - xdg-utils
+      - python3-pyqt5.qtwebkit
+      - qt6-webengine-dev
+      - qt6-webengine-dev-tools
+      - qt6-webview-plugins
+      - qt6-webview-dev
+      - qt6-websockets-dev
+      - qt6-tools-dev
+      
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0)
