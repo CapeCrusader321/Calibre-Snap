@@ -78,7 +78,7 @@ parts:
       craftctl set version=$(git describe --tags --abbrev=0)
       VER="$(git describe --tags --abbrev=0)"
       wget -q -O- https://github.com/kovidgoyal/calibre/releases/download/${VER}/calibre-${VER}-x86_64.txz |\
-           tar xvf -C /opt/calibre 
+           tar xvf -C $SNAP/opt/calibre 
     
     override-build: |
       craftctl default 
