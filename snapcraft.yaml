@@ -1,6 +1,6 @@
 name: calibre
 base: core22
-version: '6.17.0'
+adopt-info: calibre
 grade: stable
 summary: Powerful and Advanced E-Book Reader.
 description: |
@@ -36,12 +36,18 @@ apps:
     
 parts:
   calibre:
+    source: https://github.com/kovidgoyal/calibre.git
     plugin: nil
+    build-snaps:
+      - kf5-5-105-qt-5-15-9-core22-sdk
     build-packages:
       - build-essential
       - curl
       - tar
       - p7zip-full
+    override-pull:
+      craftctl default
+      craftctl set version=$(git describe --tags --abbrev=0)
     override-build:
       craftctl default
       curl -LO https://download.calibre-ebook.com/6.17.0/calibre-6.17.0-x86_64.txz
