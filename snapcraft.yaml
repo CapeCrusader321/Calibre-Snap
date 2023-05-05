@@ -1,0 +1,54 @@
+name: calibre-qt
+base: core22
+version: '6.17.0'
+grade: stable
+summary: Powerful and Advanced E-Book Reader.
+description: |
+  Powerful and Advanced E-Book Reader, written in python and qt.
+confinement: strict
+compression: lzo
+architectures:
+  - build-on: amd64
+    build-for: amd64
+layout:
+  /usr/lib/$CRAFT_ARCH_TRIPLET/espeak-ng-data:
+    symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/espeak-ng-data
+
+
+slots:
+  calibre:
+    interface: dbus
+    bus: session
+    name: com.calibre_ebook.calibre
+
+
+apps:
+  calibre-qt:
+    command: /opt/calibre
+    extensions:
+      - kde-neon
+    plugs:
+      - home
+      - raw-usb
+      - network
+      - network-status
+      - optical-drive
+      - removable-media
+    common-id: com.calibre_ebook.calibre
+    
+    
+parts:
+  calibre-qt:
+    source: https://download.calibre-ebook.com/6.17.0/calibre-6.17.0-x86_64.txz
+    plugin: dump
+    override-pull:
+      craftctl default
+      /opt/calibre/calibre_postinstall
+    
+  tts:
+    plugin: nil
+    stage-packages:
+      - espeak-ng
+      - speech-dispatcher-espeak-ng
+      - libaudio2
+      - libsndio7.0
