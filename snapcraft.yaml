@@ -44,7 +44,7 @@ parts:
       - p7zip-full
     override-build:
       craftctl default
-      curl -LO https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz
+      curl -LO https://download.calibre-ebook.com/6.17.0/calibre-6.17.0-x86_64.txz
       mkdir -p /opt/calibre && rm -rf /opt/calibre/* && tar xvf /parts/calibre/build/calibre-tarball.txz -C /opt/calibre 
       /opt/calibre/calibre_postinstall
     
