@@ -45,10 +45,10 @@ parts:
       - curl
       - tar
       - p7zip-full
-    override-pull:
+    override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0)
-    override-build:
+    override-build: |
       craftctl default
       mkdir -p /opt/calibre && rm -rf /opt/calibre/*
       curl -LO https://download.calibre-ebook.com/6.17.0/calibre-6.17.0-x86_64.txz
