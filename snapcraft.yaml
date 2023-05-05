@@ -37,7 +37,8 @@ apps:
     
 parts:
   calibre:
-    plugin: nil
+    source: https://github.com/kovidgoyal/calibre.git
+    plugin: dump
     build-snaps:
       - kf5-5-105-qt-5-15-9-core22-sdk
     build-packages:
@@ -48,6 +49,7 @@ parts:
       - libfreetype6-dev
       - libfreetype-dev
       - tar
+      - wget
       - p7zip-full
       - qt6-base-dev
       - qt6-base-dev-tools
@@ -69,13 +71,18 @@ parts:
       - xdg-desktop-portal-gtk
       - xdg-user-dirs
       
-    
-    override-prime: |
+    override-pull: |
       craftctl default
-      mkdir /usr/share/desktop-directories/
       mkdir -p /opt/calibre && rm -rf /opt/calibre/*
-      curl -LO https://download.calibre-ebook.com/6.17.0/calibre-6.17.0-x86_64.txz
-      tar xvf calibre-6.17.0-x86_64.txz -C /opt/calibre 
+      mkdir /usr/share/desktop-directories/
+      craftctl set version=$(git describe --tags --abbrev=0)
+      VER="$(git ls-remote --tags https://github.com/kovidgoyal/calibre.git | \
+           sed 's;^.*/v;;' | sort -t. -k 1,1n -k 2,2n -k 3,3n | tail -1)"
+      wget -q -O- https://github.com/kovidgoyal/calibre/releases/download/v${VER}/calibre-${VER}-x86_64.txz |\
+           tar xvf - --strip-components=1 -C /opt/calibre 
+    
+    override-build: |
+      craftctl default 
       /opt/calibre/calibre_postinstall
     
   tts:
