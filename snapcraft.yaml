@@ -52,7 +52,7 @@ parts:
       craftctl default
       mkdir -p /opt/calibre && rm -rf /opt/calibre/*
       curl -LO https://download.calibre-ebook.com/6.17.0/calibre-6.17.0-x86_64.txz
-      tar xvf /parts/calibre/build/calibre-6.17.0-x86_64.txz -C /opt/calibre 
+      tar xvf calibre-6.17.0-x86_64.txz -C /opt/calibre 
       /opt/calibre/calibre_postinstall
     
   tts:
