@@ -36,7 +36,7 @@ apps:
     
 parts:
   calibre-qt:
-    source: https://download.calibre-ebook.com/6.17.0/calibre-6.17.0-x86_64.txz
+    source: https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz
     plugin: dump
     override-pull:
       craftctl default
