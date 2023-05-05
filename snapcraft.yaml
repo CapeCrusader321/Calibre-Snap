@@ -14,14 +14,12 @@ layout:
   /usr/lib/$CRAFT_ARCH_TRIPLET/espeak-ng-data:
     symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/espeak-ng-data
 
-
 slots:
   calibre:
     interface: dbus
     bus: session
     name: com.calibre_ebook.calibre
-
-
+    
 apps:
   calibre-qt:
     command: /opt/calibre
@@ -35,7 +33,6 @@ apps:
       - optical-drive
       - removable-media
     common-id: com.calibre_ebook.calibre
-    
     
 parts:
   calibre-qt:
