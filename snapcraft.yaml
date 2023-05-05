@@ -60,7 +60,6 @@ parts:
       - qt6-webengine-dev-tools
       - qt6-webview-plugins
       - qt6-webview-dev
-      - qt6-websockets-dev
       - qt6-tools-dev
       
     override-pull: |
