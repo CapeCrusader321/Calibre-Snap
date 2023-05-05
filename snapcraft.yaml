@@ -43,8 +43,17 @@ parts:
     build-packages:
       - build-essential
       - curl
+      - bash-completion
+      - libfreetype6
+      - libfreetype6-dev
+      - libfreetype-dev
       - tar
       - p7zip-full
+      - qt6-base-dev
+      - qt6-base-dev-tools
+      - qt6-multimedia-dev
+      - qt6-image-formats-plugins
+      - qt6-l10n-tools
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0)
