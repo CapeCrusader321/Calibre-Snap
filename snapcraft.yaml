@@ -76,10 +76,9 @@ parts:
       mkdir -p /opt/calibre && rm -rf /opt/calibre/*
       mkdir /usr/share/desktop-directories/
       craftctl set version=$(git describe --tags --abbrev=0)
-      VER="$(git ls-remote --tags https://github.com/kovidgoyal/calibre.git | \
-           sed 's;^.*/v;;' | sort -t. -k 1,1n -k 2,2n -k 3,3n | tail -1)"
-      wget -q -O- https://github.com/kovidgoyal/calibre/releases/download/v${VER}/calibre-${VER}-x86_64.txz |\
-           tar xvf - --strip-components=1 -C /opt/calibre 
+      VER="$(git describe --tags --abbrev=0)"
+      wget -q -O- https://github.com/kovidgoyal/calibre/releases/download/${VER}/calibre-${VER}-x86_64.txz |\
+           tar xvf -C /opt/calibre 
     
     override-build: |
       craftctl default 
