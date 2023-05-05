@@ -1,10 +1,10 @@
 name: calibre
 base: core22
-adopt-info: calibre
+version: '6.17.0'
 grade: stable
 summary: Powerful and Advanced E-Book Reader.
 description: |
-  Powerful and Advanced E-Book Reader, written in python and qt.
+  Powerful and Advanced E-Book Reader and Editor, written in python and qt.
 confinement: strict
 compression: lzo
 architectures:
@@ -33,10 +33,10 @@ apps:
       - optical-drive
       - removable-media
     common-id: com.calibre_ebook.calibre
+    desktop: usr/share/applications/calibre-gui.desktop
     
 parts:
   calibre:
-    source: https://github.com/kovidgoyal/calibre.git
     plugin: nil
     build-snaps:
       - kf5-5-105-qt-5-15-9-core22-sdk
@@ -69,10 +69,8 @@ parts:
       - xdg-desktop-portal-gtk
       - xdg-user-dirs
       
+    
     override-pull: |
-      craftctl default
-      craftctl set version=$(git describe --tags --abbrev=0)
-    override-build: |
       craftctl default
       mkdir /usr/share/desktop-directories/
       mkdir -p /opt/calibre && rm -rf /opt/calibre/*
