@@ -45,7 +45,7 @@ parts:
     override-build:
       craftctl default
       curl -LO https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz
-      mkdir -p /opt/calibre && rm -rf /opt/calibre/* && tar xvf /path/to/downloaded/calibre-tarball.txz -C /opt/calibre 
+      mkdir -p /opt/calibre && rm -rf /opt/calibre/* && tar xvf /parts/calibre/build/calibre-tarball.txz -C /opt/calibre 
       /opt/calibre/calibre_postinstall
     
   tts:
