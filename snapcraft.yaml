@@ -1,6 +1,6 @@
 name: calibre
 base: core22
-adopt-info: calibre
+version: '6.17.0'
 grade: stable
 summary: Powerful and Advanced E-Book Reader.
 description: |
@@ -37,7 +37,7 @@ apps:
     
 parts:
   calibre:
-    source: https://github.com/kovidgoyal/calibre.git
+    source: https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz
     plugin: dump
     build-snaps:
       - kf5-5-105-qt-5-15-9-core22-sdk
@@ -71,19 +71,6 @@ parts:
       - xdg-desktop-portal-gtk
       - xdg-user-dirs
       
-    override-pull: |
-      craftctl default
-      mkdir -p /opt/calibre && rm -rf /opt/calibre/*
-      mkdir /usr/share/desktop-directories/
-      craftctl set version=$(git describe --tags --abbrev=0)
-      VER="$(git describe --tags --abbrev=0)"
-      wget -q -O- https://github.com/kovidgoyal/calibre/releases/download/${VER}/calibre-${VER}-x86_64.txz |\
-           tar xvf -C $SNAP/opt/calibre 
-    
-    override-build: |
-      craftctl default 
-      /opt/calibre/calibre_postinstall
-    
   tts:
     plugin: nil
     stage-packages:
