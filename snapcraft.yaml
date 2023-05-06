@@ -38,6 +38,7 @@ apps:
 parts:
   calibre:
     source: https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz
+    source-type: tar
     plugin: dump
     build-snaps:
       - kf5-5-105-qt-5-15-9-core22-sdk
