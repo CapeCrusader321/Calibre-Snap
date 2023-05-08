@@ -74,8 +74,8 @@ parts:
       craftctl default
       mkdir -p $CRAFT_PART_SRC/opt/calibre
       craftctl set version=$(git describe --tags --abbrev=0)
-      VER="$(git describe --tags --abbrev=0 | \
-           sed 's;^.*/v;;')"
+      VER="$(git describe --tags --abbrev=0 |\
+           sed -e 's/\<v\>//g')"
       wget -q -O- https://github.com/kovidgoyal/calibre/releases/download/v${VER}/calibre-${VER}-x86_64.txz |\
            tar xvf - --strip-components=1 -C $CRAFT_PART_SRC/opt/calibre
   
