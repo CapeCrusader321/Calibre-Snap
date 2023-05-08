@@ -1,6 +1,6 @@
 name: calibre
 base: core22
-version: '6.17.0'
+adopt-info: calibre
 grade: stable
 summary: Powerful and Advanced E-Book Reader.
 description: |
