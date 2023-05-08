@@ -37,8 +37,7 @@ apps:
     
 parts:
   calibre:
-    source: https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz
-    source-type: tar
+    source: https://github.com/kovidgoyal/calibre.git
     plugin: dump
     build-snaps:
       - kf5-5-105-qt-5-15-9-core22-sdk
@@ -71,7 +70,17 @@ parts:
       - xdg-desktop-portal
       - xdg-desktop-portal-gtk
       - xdg-user-dirs
-      
+    override-pull: |
+      craftctl default
+      mkdir -p $CRAFT_PART_SRC/opt/calibre
+      craftctl set version=$(git describe --tags --abbrev=0)
+      VER="$(git ls-remote --tags https://github.com/kovidgoyal/calibre.git | \
+           sed 's;^.*/v;;' | sort -t. -k 1,1n -k 2,2n -k 3,3n | tail -1)"
+      wget -q -O- https://github.com/kovidgoyal/calibre/releases/download/v${VER}/calibre-${VER}-x86_64.txz |\
+           tar xvf - --strip-components=1 -C $CRAFT_PART_SRC/opt/calibre
+  
+  #https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz
+     
   tts:
     plugin: nil
     stage-packages:
