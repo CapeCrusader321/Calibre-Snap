@@ -27,6 +27,7 @@ apps:
       - kde-neon
     plugs:
       - home
+      - audio-playback
       - raw-usb
       - network
       - network-status
@@ -72,14 +73,12 @@ parts:
       - xdg-user-dirs
     override-pull: |
       craftctl default
-      mkdir -p $CRAFT_PART_SRC/opt/calibre
       craftctl set version=$(git describe --tags --abbrev=0)
-      VER="$(git describe --tags --abbrev=0 |\
-           sed -e 's/\<v\>//g')"
-      wget -q -O- https://github.com/kovidgoyal/calibre/releases/download/v${VER}/calibre-${VER}-x86_64.txz |\
-           tar xvf - --strip-components=1 -C $CRAFT_PART_SRC/opt/calibre
-  
-  #https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz
+    override-build: |
+      craftctl default
+      mkdir -p /opt/calibre && rm -rf /opt/calibre/*
+      curl -LO https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz && tar xvf calibre*.txz -C $CRAFT_PART_BUILD/opt/calibre 
+      $CRAFT_PART_BUILD/opt/calibre/calibre_postinstall
      
   tts:
     plugin: nil
