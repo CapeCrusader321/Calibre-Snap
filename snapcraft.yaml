@@ -76,7 +76,7 @@ parts:
       craftctl set version=$(git describe --tags --abbrev=0)
     override-build: |
       craftctl default
-      mkdir -p $CRAFT_PART_BUILD/usr/share/desktop-directories/
+      mkdir -p /usr/share/desktop-directories/
       mkdir -p $CRAFT_PART_BUILD/opt/calibre && rm -rf $CRAFT_PART_BUILD/opt/calibre/*
       curl -LO https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz && tar xvf calibre*.txz -C $CRAFT_PART_BUILD/opt/calibre 
       $CRAFT_PART_BUILD/opt/calibre/calibre_postinstall
