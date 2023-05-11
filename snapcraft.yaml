@@ -74,7 +74,7 @@ parts:
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0)
-    override-build: |
+    override-prime: |
       craftctl default
       mkdir -p /usr/share/desktop-directories/
       mkdir -p $CRAFT_PART_BUILD/opt/calibre && rm -rf $CRAFT_PART_BUILD/opt/calibre/*
