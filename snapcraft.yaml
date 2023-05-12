@@ -34,8 +34,7 @@ apps:
       - optical-drive
       - removable-media
     common-id: com.calibre_ebook.calibre
-    #desktop: usr/share/applications/calibre-gui.desktop
-    
+   
 parts:
   calibre:
     source: https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz
