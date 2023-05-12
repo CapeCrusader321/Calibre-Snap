@@ -75,7 +75,7 @@ parts:
     override-build: |
       mkdir -p /usr/share/desktop-directories/
       mkdir -p /opt/calibre/
-      cp -r parts/calibre/build/. /opt/calibre/
+      cp -r $CRAFT_PART_BUILD/. /opt/calibre/
       cd /opt/calibre/ && /opt/calibre/calibre_postinstall
     #stage-packages:
      
