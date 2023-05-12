@@ -72,12 +72,6 @@ parts:
       - xdg-desktop-portal
       - xdg-desktop-portal-gtk
       - xdg-user-dirs
-    override-build: |
-      mkdir -p /usr/share/desktop-directories/
-      mkdir -p /opt/calibre/
-      cp -r $CRAFT_PART_BUILD/. /opt/calibre/
-    #cd /opt/calibre/ && /opt/calibre/calibre_postinstall
-    #stage-packages:
      
   tts:
     plugin: nil
