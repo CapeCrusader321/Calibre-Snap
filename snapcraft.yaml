@@ -22,7 +22,7 @@ slots:
     
 apps:
   calibre:
-    command: usr/bin/calibre
+    command: opt/calibre/calibre
     extensions:
       - kde-neon
     plugs:
@@ -76,7 +76,7 @@ parts:
       mkdir -p /usr/share/desktop-directories/
       mkdir -p /opt/calibre/
       cp -r $CRAFT_PART_BUILD/. /opt/calibre/
-      cd /opt/calibre/ && /opt/calibre/calibre_postinstall
+    #cd /opt/calibre/ && /opt/calibre/calibre_postinstall
     #stage-packages:
      
   tts:
