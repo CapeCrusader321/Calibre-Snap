@@ -22,7 +22,7 @@ slots:
     
 apps:
   calibre:
-    command: opt/calibre/calibre
+    command: calibre
     extensions:
       - kde-neon
     plugs:
@@ -38,10 +38,11 @@ apps:
     
 parts:
   calibre:
-    source: https://github.com/kovidgoyal/calibre.git
+    source: https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz
+    source-type: tar
     plugin: dump
     build-snaps:
-      - kf5-5-105-qt-5-15-9-core22-sdk
+      - kf5-5-104-qt-5-15-8-core22-sdk
     build-packages:
       - build-essential
       - curl
@@ -71,15 +72,6 @@ parts:
       - xdg-desktop-portal
       - xdg-desktop-portal-gtk
       - xdg-user-dirs
-    override-pull: |
-      craftctl default
-      craftctl set version=$(git describe --tags --abbrev=0)
-    override-prime: |
-      craftctl default
-      mkdir -p /usr/share/desktop-directories/
-      mkdir -p $CRAFT_PART_BUILD/opt/calibre && rm -rf $CRAFT_PART_BUILD/opt/calibre/*
-      curl -LO https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz && tar xvf calibre*.txz -C $CRAFT_PART_BUILD/opt/calibre 
-      $CRAFT_PART_BUILD/opt/calibre/calibre_postinstall
      
   tts:
     plugin: nil
