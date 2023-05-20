@@ -77,7 +77,7 @@ parts:
       craftctl set version=$(git describe --tags --abbrev=0 | cut -c 2-)
       VER="$(git describe --tags --abbrev=0 | cut -c 2-)"
       wget -q -O- https://github.com/kovidgoyal/calibre/releases/download/v${VER}/calibre-${VER}-x86_64.txz |\
-           tar xvf - --strip-components=1 -C $CRAFT_PART_SRC/opt/calibre
+           tar xvf -J -C $CRAFT_PART_SRC/opt/calibre
     override-build : |
       craftctl default
       mkdir -p $CRAFT_PART_INSTALL/usr/share/desktop-directories
