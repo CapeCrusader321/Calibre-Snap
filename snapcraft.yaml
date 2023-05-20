@@ -29,12 +29,19 @@ apps:
       - home
       - audio-playback
       - network
+      - bluez
       - network-status
       - optical-drive
       - removable-media
     common-id: com.calibre_ebook.calibre 
     desktop: share/applications/com.calibre_ebook.calibre.desktop
-    
+  
+  ebook-editor:
+    command: bin/ebook-edit
+    plugs:
+      - home
+      - removable-media
+      - network
   ebook-viewer:
     command: bin/ebook-viewer
     plugs:
@@ -45,7 +52,7 @@ apps:
       - audio-playback
    
   lrf-viewer:
-    command: bin/lrf-viewer
+    command: bin/lrfviewer
     plugs: 
       - home
       - network
@@ -54,6 +61,7 @@ apps:
 parts:
   calibre:
     source: https://github.com/kovidgoyal/calibre.git
+    parse-info: [/share/metainfo/com.calibre_ebook.calibre.metainfo.xml]
     plugin: dump
     build-packages:  
       - build-essential
