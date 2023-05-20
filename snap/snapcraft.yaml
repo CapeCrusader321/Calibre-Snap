@@ -34,11 +34,11 @@ apps:
       - optical-drive
       - removable-media
     common-id: com.calibre_ebook.calibre
-   
+    #desktop:
+    
 parts:
   calibre:
-    source: https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz
-    source-type: tar
+    source: https://github.com/kovidgoyal/calibre.git
     plugin: dump
     build-snaps:
       - kf5-5-104-qt-5-15-8-core22-sdk
@@ -71,7 +71,22 @@ parts:
       - xdg-desktop-portal
       - xdg-desktop-portal-gtk
       - xdg-user-dirs
-     
+    override-pull: |
+      craftctl default
+      mkdir -p $CRAFT_PART_SRC/opt/calibre
+      craftctl set version=$(git describe --tags --abbrev=0 | cut -c 2-)
+      VER="$(git describe --tags --abbrev=0 | cut -c 2-)"
+      wget -q -O- https://github.com/kovidgoyal/calibre/releases/download/v${VER}/calibre-${VER}-x86_64.txz |\
+           tar xvf - --strip-components=1 -C $CRAFT_PART_SRC/opt/calibre
+    override-build : |
+      craftctl default
+      mkdir -p $CRAFT_PART_INSTALL/usr/share/desktop-directories
+      cd $CRAFT_PART_INSTALL/opt/calibre/ && calibre_postinstall
+      
+      
+  #sudo mkdir -p /opt/calibre && sudo rm -rf /opt/calibre/* && sudo tar xvf /path/to/downloaded/calibre-tarball.txz -C /opt/calibre && sudo /opt/calibre/calibre_postinstall 
+  #https://github.com/kovidgoyal/calibre/releases/download/v6.17.0/calibre-6.17.0-x86_64.txz
+   
   tts:
     plugin: nil
     stage-packages:
