@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Calibre
-Comment=E-Book Management
-TryExec=/snap/bin/calibre
-Exec=/snap/bin/calibre %F
-Icon=${SNAP}/resources/images/book.png
-MimeType=application/x-mobipocket-ebook;application/epub+zip;x-content/ebook-reader;
-Categories=Office;Graphics;Viewer;
