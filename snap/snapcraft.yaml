@@ -79,6 +79,7 @@ parts:
       curl -LO https://github.com/kovidgoyal/calibre/releases/download/v${VER}/calibre-${VER}-x86_64.txz
     override-build : |
       craftctl default
+      mkdir -p /usr/share/desktop-directories/
       mkdir -p $CRAFT_PART_INSTALL/usr/share/desktop-directories/
       tar xvf $CRAFT_PART_INSTALL/calibre*.txz -C $CRAFT_PART_INSTALL/opt/calibre
       $CRAFT_PART_INSTALL/opt/calibre/calibre_postinstall
