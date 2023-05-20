@@ -22,20 +22,35 @@ slots:
     
 apps:
   calibre:
-    command: opt/calibre/calibre
+    command: bin/calibre
     extensions:
       - kde-neon
     plugs:
       - home
       - audio-playback
-      - raw-usb
       - network
       - network-status
       - optical-drive
       - removable-media
-    common-id: com.calibre_ebook.calibre
-    #desktop:
+    common-id: com.calibre_ebook.calibre 
+    desktop: share/applications/com.calibre_ebook.calibre.desktop
     
+  ebook-viewer:
+    command: bin/ebook-viewer
+    plugs:
+      - home
+      - removable-media
+      - optical-drive
+      - network
+      - audio-playback
+   
+  lrf-viewer:
+    command: bin/lrf-viewer
+    plugs: 
+      - home
+      - network
+      - removable-media
+      
 parts:
   calibre:
     source: https://github.com/kovidgoyal/calibre.git
