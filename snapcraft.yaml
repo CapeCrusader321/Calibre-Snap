@@ -66,8 +66,6 @@ parts:
     build-packages:  
       - build-essential
       - curl
-    build-environment:
-      - XDG_UTILS_INSTALL_MODE=system
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0 | cut -c 2-)
