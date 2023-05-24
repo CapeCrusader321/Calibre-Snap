@@ -105,42 +105,6 @@ parts:
       tar -xvf calibre*.txz -C "${CRAFT_PART_INSTALL}/lib/calibre"
       rm -f calibre*.txz
       $CRAFT_PART_INSTALL/lib/calibre/calibre_postinstall --root=$CRAFT_PART_INSTALL
-      # post-install for ebook-edit
-      mv $CRAFT_PART_INSTALL/share/applications/{calibre-ebook-edit,com.calibre_ebook.calibre.ebook-edit}.desktop
-      for p in 16 32 48 64 128 256; do mv $CRAFT_PART_INSTALL/share/icons/hicolor/${p}x${p}/apps/{calibre-ebook-edit,com.calibre_ebook.calibre.ebook-edit}.png;
-      done
-      desktop-file-edit --set-key Icon --set-value com.calibre_ebook.calibre.ebook-edit $CRAFT_PART_INSTALL/share/applications/com.calibre_ebook.calibre.ebook-edit.desktop
-
-      # post-install for ebook-viewer
-      # NOTE: Upstream desktop and icon basenames do not match
-      mv $CRAFT_PART_INSTALL/share/applications/{calibre-ebook-viewer,com.calibre_ebook.calibre.ebook-viewer}.desktop
-      for p in 16 32 48 64 128 256; do mv $CRAFT_PART_INSTALL/share/icons/hicolor/${p}x${p}/apps/{calibre-viewer,com.calibre_ebook.calibre.ebook-viewer}.png;
-      done
-      desktop-file-edit --set-key Icon --set-value com.calibre_ebook.calibre.ebook-viewer $CRAFT_PART_INSTALL/share/applications/com.calibre_ebook.calibre.ebook-viewer.desktop
-
-      # post-install for lrfviewer
-      # NOTE: Both lrfviewer and ebook-viewer share the same icon
-      mv $CRAFT_PART_INSTALL/share/applications/{calibre-lrfviewer,com.calibre_ebook.calibre.lrfviewer}.desktop
-      desktop-file-edit --set-key Icon --set-value com.calibre_ebook.calibre.ebook-viewer $CRAFT_PART_INSTALL/share/applications/com.calibre_ebook.calibre.lrfviewer.desktop
-
-      # post-install for calibre
-      mv $CRAFT_PART_INSTALL/share/applications/{calibre-gui,com.calibre_ebook.calibre}.desktop
-      for p in 16 32 48 64 128 256; do mv $CRAFT_PART_INSTALL/share/icons/hicolor/${p}x${p}/apps/{calibre-gui,com.calibre_ebook.calibre}.png;
-      done
-      desktop-file-edit --set-key Icon --set-value com.calibre_ebook.calibre $CRAFT_PART_INSTALL/share/applications/com.calibre_ebook.calibre.desktop
-
-      # post-install for metainfo
-      mv $CRAFT_PART_INSTALL/share/metainfo/{calibre-gui,com.calibre_ebook.calibre}.metainfo.xml
-      appstream-util modify $CRAFT_PART_INSTALL/share/metainfo/com.calibre_ebook.calibre.metainfo.xml
-      id com.calibre_ebook.calibre
-      appstream-util modify $CRAFT_PART_INSTALL/share/metainfo/com.calibre_ebook.calibre.metainfo.xml
-      launchable com.calibre_ebook.calibre.desktop
-      appstream-util add-provide $CRAFT_PART_INSTALL/share/metainfo/com.calibre_ebook.calibre.metainfo.xml
-      id calibre-gui.desktop
-
-      # post-install for MIME types
-      mv $CRAFT_PART_INSTALL/share/mime/packages/{calibre-mimetypes,com.calibre_ebook.calibre}.xml
-    
   tts:
     plugin: nil
     stage-packages:
