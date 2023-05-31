@@ -23,7 +23,7 @@ slots:
     
 apps:
   calibre:
-    command: usr/bin/calibre
+    command: bin/calibre
     extensions:
       - kde-neon
     plugs:
@@ -36,7 +36,7 @@ apps:
       - optical-drive
       - removable-media
     common-id: com.calibre_ebook.calibre 
-    desktop: usr/share/applications/calibre.desktop
+    desktop: share/applications/calibre.desktop
       
 parts:
   calibre:
