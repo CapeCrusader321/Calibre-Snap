@@ -10,6 +10,7 @@ compression: lzo
 architectures:
   - build-on: amd64
     build-for: amd64
+    
 layout:
   /usr/lib/$CRAFT_ARCH_TRIPLET/espeak-ng-data:
     symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/espeak-ng-data
@@ -30,38 +31,16 @@ apps:
       - audio-playback
       - network
       - bluez
+      - network-bind
       - network-status
       - optical-drive
       - removable-media
     common-id: com.calibre_ebook.calibre 
-    desktop: share/applications/com.calibre_ebook.calibre.desktop
-  
-  ebook-editor:
-    command: bin/ebook-edit
-    plugs:
-      - home
-      - removable-media
-      - network
-  ebook-viewer:
-    command: bin/ebook-viewer
-    plugs:
-      - home
-      - removable-media
-      - optical-drive
-      - network
-      - audio-playback
-   
-  lrf-viewer:
-    command: bin/lrfviewer
-    plugs: 
-      - home
-      - network
-      - removable-media
+    desktop: usr/share/applications/calibre.desktop
       
 parts:
   calibre:
     source: https://github.com/kovidgoyal/calibre.git
-    parse-info: [/share/metainfo/com.calibre_ebook.calibre.metainfo.xml]
     plugin: dump
     build-packages:  
       - build-essential
@@ -95,16 +74,16 @@ parts:
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0 | cut -c 2-)
+      mkdir -p $CRAFT_PART_SRC/opt/calibre/
+      mkdir -p $CRAFT_PART_SRC/usr/share/desktop-directories/
       VER="$(git describe --tags --abbrev=0 | cut -c 2-)"
       curl -LO https://github.com/kovidgoyal/calibre/releases/download/v${VER}/calibre-${VER}-x86_64.txz
-      mkdir -p /usr/share/desktop-directories/
+      tar -xvf calibre*.txz -C $CRAFT_PART_SRC/opt/calibre
     override-build : |
       craftctl default
-      mkdir -p $CRAFT_PART_INSTALL/lib/calibre
-      mkdir -p "${CRAFT_PART_INSTALL}/bin" "${CRAFT_PART_INSTALL}"/share/{applications,desktop-directories,icons/hicolor,mime/packages}
-      tar -xvf calibre*.txz -C "${CRAFT_PART_INSTALL}/lib/calibre"
       rm -f calibre*.txz
-      $CRAFT_PART_INSTALL/lib/calibre/calibre_postinstall --root=$CRAFT_PART_INSTALL
+      $CRAFT_PART_INSTALL/opt/calibre/calibre_postinstall --root=$CRAFT_PART_INSTALL
+      
   tts:
     plugin: nil
     stage-packages:
