@@ -92,3 +92,13 @@ parts:
       - speech-dispatcher-espeak-ng
       - libaudio2
       - libsndio7.0
+      
+  cleanup:
+    after: [tts]
+    plugin: nil
+    build-snaps: [core22]
+    override-prime: |
+      set -eux
+      for snap in "core22" ; do
+        cd "/snap/$snap/current" && find . -type f,l -name *.so.* -exec rm -f "$CRAFT_PRIME/{}" \;
+      done    
