@@ -75,14 +75,15 @@ parts:
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0 | cut -c 2-)
       mkdir -p $CRAFT_PART_SRC/opt/calibre/
-      mkdir -p $CRAFT_PART_SRC/usr/share/desktop-directories/
+      mkdir -p ./usr/share/desktop-directories/
       VER="$(git describe --tags --abbrev=0 | cut -c 2-)"
       curl -LO https://github.com/kovidgoyal/calibre/releases/download/v${VER}/calibre-${VER}-x86_64.txz
       tar -xvf calibre*.txz -C $CRAFT_PART_SRC/opt/calibre
     override-build : |
       craftctl default
       rm -f calibre*.txz
-      $CRAFT_PART_INSTALL/opt/calibre/calibre_postinstall --root=$CRAFT_PART_INSTALL
+      chmod 755 ./opt/calibre/brave/calibre_postinstall
+      $CRAFT_PART_INSTALL/opt/calibre/calibre_postinstall
       
   tts:
     plugin: nil
