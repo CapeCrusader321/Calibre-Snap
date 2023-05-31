@@ -96,9 +96,9 @@ parts:
   cleanup:
     after: [tts]
     plugin: nil
-    build-snaps: [core22]
+    build-snaps: [core22, kde-frameworks-5-102-qt-5-15-8-core22, kde-frameworks-5-102-qt-5-15-8-core22-sd]
     override-prime: |
       set -eux
-      for snap in "core22" ; do
+      for snap in "core22" "kde-frameworks-5-102-qt-5-15-8-core22" "kde-frameworks-5-102-qt-5-15-8-core22-sd" ; do
         cd "/snap/$snap/current" && find . -type f,l -name *.so.* -exec rm -f "$CRAFT_PRIME/{}" \;
       done    
