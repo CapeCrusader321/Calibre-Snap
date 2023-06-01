@@ -23,7 +23,8 @@ slots:
     
 apps:
   calibre:
-    command: opt/calibre/calibre
+    command: opt/calibre/bin/calibre
+    #command: usr/bin/calibre
     extensions:
       - kde-neon
     plugs:
@@ -36,7 +37,7 @@ apps:
       - optical-drive
       - removable-media
     common-id: com.calibre_ebook.calibre 
-    #desktop: share/applications/calibre.desktop
+    #desktop: usr/share/applications/calibre.desktop
       
 parts:
   calibre:
@@ -75,19 +76,17 @@ parts:
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0 | cut -c 2-)
       mkdir -p $CRAFT_PART_SRC/opt/calibre/
-      mkdir -p $CRAFT_PART_SRC/usr/bin/
-      mkdir -p $CRAFT_PART_SRC/usr/share/applications/
-      mkdir -p $CRAFT_PART_SRC/usr/lib/
-      mkdir -p $CRAFT_PART_SRC/usr/share/desktop-directories/
-      mkdir -p /usr/share/desktop-directories/
+      mkdir -p /usr/share/desktop-directories/  
+      # mkdir -p /usr/share/desktop-directories/ may be the root cause of all errors as it leads to 
+      # calibre not adjusting to the snap build env,this should be : mkdir -p $CRAFT_PART_SRC/usr/share/desktop-directories/
+      # But without it XDG Gives error and halts build, using it with
+      # $CRAFT_PART_SRC leads to XDG Not recognising it
       VER="$(git describe --tags --abbrev=0 | cut -c 2-)"
       curl -LO https://github.com/kovidgoyal/calibre/releases/download/v${VER}/calibre-${VER}-x86_64.txz
       tar -xvf calibre*.txz -C $CRAFT_PART_SRC/opt/calibre
     override-build : |
       craftctl default
-      rm -f calibre*.txz
-      chmod 755 ./opt/calibre/calibre_postinstall
-      $CRAFT_PART_INSTALL/opt/calibre/calibre_postinstall
+      $CRAFT_PART_INSTALL/opt/calibre/calibre_postinstall --root=$CRAFT_PART_INSTALL
       
   tts:
     plugin: nil
@@ -96,9 +95,16 @@ parts:
       - speech-dispatcher-espeak-ng
       - libaudio2
       - libsndio7.0
+  
+  fatloss:
+    after: [calibre, tts]
+    override-prime: |
+      craftctl default
+      rm -f calibre*.txz
+      rm -f Changelog*.txt
       
   cleanup:
-    after: [tts]
+    after: [calibre, fatloss, tts]
     plugin: nil
     build-snaps: [core22, kde-frameworks-5-102-qt-5-15-8-core22, kde-frameworks-5-102-qt-5-15-8-core22-sd]
     override-prime: |
