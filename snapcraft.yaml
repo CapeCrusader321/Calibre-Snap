@@ -97,6 +97,7 @@ parts:
       - libsndio7.0
   
   fatloss:
+    plugin: nil
     after: [calibre, tts]
     override-prime: |
       craftctl default
