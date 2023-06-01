@@ -107,9 +107,9 @@ parts:
   cleanup:
     after: [calibre, fatloss, tts]
     plugin: nil
-    build-snaps: [core22, kde-frameworks-5-102-qt-5-15-8-core22, kde-frameworks-5-102-qt-5-15-8-core22-sd]
+    build-snaps: [core22, kde-frameworks-5-102-qt-5-15-8-core22, kde-frameworks-5-102-qt-5-15-8-core22-sd, gtk-common-themes]
     override-prime: |
       set -eux
-      for snap in "core22" "kde-frameworks-5-102-qt-5-15-8-core22" "kde-frameworks-5-102-qt-5-15-8-core22-sd" ; do
+      for snap in "core22" "gtk-common-themes" "kde-frameworks-5-102-qt-5-15-8-core22" "kde-frameworks-5-102-qt-5-15-8-core22-sd" ; do
         cd "/snap/$snap/current" && find . -type f,l -name *.so.* -exec rm -f "$CRAFT_PRIME/{}" \;
       done    
