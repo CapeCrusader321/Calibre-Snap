@@ -86,7 +86,7 @@ parts:
       tar -xvf calibre*.txz -C $CRAFT_PART_SRC/opt/calibre
     override-build : |
       craftctl default
-      $CRAFT_PART_INSTALL/opt/calibre/calibre_postinstall --root=$CRAFT_PART_INSTALL
+      $CRAFT_PART_INSTALL/opt/calibre/calibre_postinstall
       
   tts:
     plugin: nil
