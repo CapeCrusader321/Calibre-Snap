@@ -1,4 +1,4 @@
-# Calibre-Snap
-## Snap Builds of Calibre
+# _Calibre-Snap_
+## _Snap Builds of Calibre_
 
-### Currently In Testing And Beta, Use At Your Own Risk !
+### _Currently In Testing And Beta, Use At Your Own Risk !_
