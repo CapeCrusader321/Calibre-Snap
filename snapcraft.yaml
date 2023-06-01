@@ -83,7 +83,8 @@ parts:
       VER="$(git describe --tags --abbrev=0 | cut -c 2-)"
       curl -LO https://github.com/kovidgoyal/calibre/releases/download/v${VER}/calibre-${VER}-x86_64.txz
       mkdir -p $CRAFT_PART_SRC/opt/calibre/
-      rm- rf $CRAFT_PART_SRC/opt/calibre/*
+      mkdir -p $CRAFT_PART_SRC/usr/share/desktop-directories/
+      rm -rf $CRAFT_PART_SRC/opt/calibre/*
       # mkdir -p /usr/share/desktop-directories/ may be the root cause of all errors as it leads to 
       # calibre not adjusting to the snap build env,this should be : mkdir -p $CRAFT_PART_SRC/usr/share/desktop-directories/
       # But without it XDG Gives error and halts build, using it with
