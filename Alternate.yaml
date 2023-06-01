@@ -1,0 +1,66 @@
+name: calibre
+base: core22
+adopt-info: calibre
+grade: stable
+summary: Powerful and Advanced E-Book Reader.
+description: |
+  Powerful and Advanced E-Book Reader and Editor, written in python and qt.
+confinement: strict
+compression: lzo
+architectures:
+  - build-on: amd64
+    build-for: amd64
+    
+layout:
+  /usr/lib/$CRAFT_ARCH_TRIPLET/espeak-ng-data:
+    symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/espeak-ng-data
+
+slots:
+  calibre:
+    interface: dbus
+    bus: session
+    name: com.calibre_ebook.calibre
+    
+apps:
+  calibre:
+    command: usr/bin/calibre
+    extensions:
+      - kde-neon
+    plugs:
+      - home
+      - audio-playback
+      - bluez
+      - network
+      - network-bind
+      - network-status
+      - optical-drive
+      - removable-media
+      - udisks2
+      - unity7
+      - screen-inhibit-control
+      - mount-observe
+      - browser-support
+    common-id: com.calibre_ebook.calibre 
+    desktop: usr/share/applications/calibre.desktop
+      
+parts:
+  calibre:
+    plugin: nil
+    build-packages:
+      - wget
+      - dpkg
+      - build-essential
+    override-build: |
+      craftctl default
+      mkdir -p $CRAFT_PART_INSTALL/opt
+      wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sh /dev/stdin install_dir=$CRAFT_PART_INSTALL/opt
+      
+  tts:
+    plugin: nil
+    after: [calibre]
+    stage-packages:
+      - espeak-ng
+      - speech-dispatcher-espeak-ng
+      - libaudio2
+      - libsndio7.0
+  
