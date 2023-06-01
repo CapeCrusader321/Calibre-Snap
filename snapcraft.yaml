@@ -23,7 +23,7 @@ slots:
     
 apps:
   calibre:
-    command: opt/calibre/bin/calibre
+    command: opt/calibre/calibre
     #command: usr/bin/calibre
     extensions:
       - kde-neon
