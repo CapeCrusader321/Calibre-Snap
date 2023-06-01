@@ -30,12 +30,17 @@ apps:
     plugs:
       - home
       - audio-playback
-      - network
       - bluez
+      - network
       - network-bind
       - network-status
       - optical-drive
       - removable-media
+      - udisks2
+      - unity7
+      - screen-inhibit-control
+      - mount-observe
+      - browser-support
     common-id: com.calibre_ebook.calibre 
     #desktop: usr/share/applications/calibre.desktop
       
