@@ -108,7 +108,9 @@ parts:
       - qt6-webview-plugins
       - qt6-webview-dev
       - qt6-tools-dev
-      - xdg-utils
+      - libnss3
+      - libnss3-dev
+      - libnss3-tools
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0 | cut -c 2-)
