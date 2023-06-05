@@ -23,8 +23,7 @@ slots:
     
 apps:
   calibre:
-    command: calibre/calibre
-    #command: usr/bin/calibre
+    command: bin/calibre
     extensions:
       - kde-neon
     plugs:
@@ -42,7 +41,50 @@ apps:
       - mount-observe
       - browser-support
     common-id: com.calibre_ebook.calibre 
-    #desktop: usr/share/applications/calibre.desktop
+    desktop: share/applications/calibre.desktop
+      
+  ebook-viewer:
+    command: bin/ebook-viewer
+    extensions:
+      - kde-neon
+    plugs:
+      - home
+      - removable-media
+      - audio-playback
+      - network
+      - network-status
+      - bluez
+      - optical-drive
+      - unity7
+      - screen-inhibit-control
+      
+  ebook-edit:
+    command: bin/ebook-edit
+    extensions:
+      - kde-neon
+    plugs:
+      - home
+      - removable-media
+      - network
+      - network-status
+      - bluez
+      - optical-drive
+      - unity7
+      - screen-inhibit-control    
+      
+  lrf-viewer:
+    command: bin/lrf-viewer
+    extensions:
+      - kde-neon
+    plugs:
+      - home
+      - removable-media
+      - network
+      - network-status
+      - bluez
+      - optical-drive
+      - unity7
+      - screen-inhibit-control
       
 parts:
   calibre:
@@ -73,10 +115,10 @@ parts:
       curl -LO https://github.com/kovidgoyal/calibre/releases/download/v${VER}/calibre-${VER}-x86_64.txz
     override-build : |
       craftctl default
-      mkdir -p $CRAFT_PART_INSTALL/opt/calibre/
+      mkdir -p $CRAFT_PART_INSTALL/lib/calibre/
       mkdir -p $CRAFT_PART_INSTALL/bin $CRAFT_PART_INSTALL/share/{applications,desktop-directories,icons/hicolor,mime/packages}
-      tar -xvf calibre*.txz -C $CRAFT_PART_INSTALL/opt/calibre
-      $CRAFT_PART_INSTALL/opt/calibre/calibre_postinstall =$CRAFT_PART_INSTALL
+      tar -xvf calibre*.txz -C $CRAFT_PART_INSTALL/lib/calibre
+      $CRAFT_PART_INSTALL/lib/calibre/calibre_postinstall =$CRAFT_PART_INSTALL
  
   tts:
     plugin: nil
@@ -93,7 +135,7 @@ parts:
       craftctl default
       rm -f calibre*.txz
       rm -f Changelog*.txt
-      rm ./opt/calibre/resources/fonts/liberation"/*.ttf
+      rm ./lib/calibre/resources/fonts/liberation"/*.ttf
       
   cleanup:
     after: [calibre, fatloss, tts]
