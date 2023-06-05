@@ -138,7 +138,6 @@ parts:
       craftctl default
       rm -f calibre*.txz
       rm -f Changelog*.txt
-      rm ./lib/calibre/resources/fonts/liberation/*.ttf
       
   cleanup:
     after: [calibre, fatloss, tts]
