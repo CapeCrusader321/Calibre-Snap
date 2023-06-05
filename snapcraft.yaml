@@ -108,6 +108,7 @@ parts:
       - qt6-webview-plugins
       - qt6-webview-dev
       - qt6-tools-dev
+      - xdg-utils
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0 | cut -c 2-)
